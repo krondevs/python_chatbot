@@ -389,7 +389,7 @@ def handle_message(update: Update, context: CallbackContext):
     pregunta_usuario = update.message.text
     respuesta_modelo = model.predict([pregunta_usuario])[0]
     update.message.reply_text(f"{respuesta_modelo}")
-updater = Updater(token='', use_context=True)
+updater = Updater(token='5535215755:AAF-jnYdxCEw9Y2HNAhXiaEvOoME2LSFF1A', use_context=True)
 
 dp = updater.dispatcher
 
