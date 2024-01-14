@@ -383,28 +383,18 @@ questions_list = (
 
 preguntas = list(data.keys())
 respuestas = list(data.values())
-
-# Crear el clasificador con un pipeline
 model = make_pipeline(CountVectorizer(), MultinomialNB())
 model.fit(preguntas, respuestas)
-
-# Función para manejar mensajes del usuario
 def handle_message(update: Update, context: CallbackContext):
     pregunta_usuario = update.message.text
     respuesta_modelo = model.predict([pregunta_usuario])[0]
     update.message.reply_text(f"{respuesta_modelo}")
+updater = Updater(token='', use_context=True)
 
-# Inicializar el bot de Telegram
-updater = Updater(token='5535215755:AAF-jnYdxCEw9Y2HNAhXiaEvOoME2LSFF1A', use_context=True)
-
-# Obtener el despachador para registrar manejadores
 dp = updater.dispatcher
 
-# Registrar el manejador para manejar mensajes de texto
 dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
 
-# Iniciar el bot
 updater.start_polling()
 
-# Mantener el bot en ejecución
 updater.idle()
